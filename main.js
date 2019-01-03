@@ -35,7 +35,7 @@ function czytaj_ranking() {
   console.log("Funkcja ranking");
   $("#dodaj_form").hide();
   $("#gra").hide();
-  $("#ranking_zawartosc=").show();
+  $("#ranking_zawartosc").show();
   $.ajax({
     async: false,
     url: "ranking.json",
@@ -43,7 +43,6 @@ function czytaj_ranking() {
     success: function(ranking) {
     for(i = 0; i < ranking["ranking"].length; i++)
       $("#ranking_zawartosc").append("<div class = 'ranking_wiersz'>" + ranking["ranking"][i].imie + " wygrał(a) "+ ranking["ranking"][i].kwota + "</div>");
-      console.log($("#ranking_zawartosc"));
     },
     error: function(err) {
       console.error(err.status);
@@ -74,10 +73,12 @@ function sprawdz(index) {
   }
   else {
     strona = "koniec_gry";
-    if(runda > 1)
+    if(runda > 1){
       kwota = $("#kwoty li:eq(" + (runda - 2) + ")").html();
+      kwota = kwota.substring(0, kwota.length-2);
+    }
     else
-      kwota = "0 zł";
+      kwota = "0";
     json = {
       imie: imie,
       kwota: kwota
