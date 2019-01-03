@@ -10,15 +10,16 @@ $(document).ready( function() {
   gra();
   imie = document.cookie.substring(0, document.cookie.search(";"));
   $("#imie_input").attr("value", imie);
+  $("#ranking_zawartosc").hide();
   $("#dodaj_form").hide();
   $("#dodaj_button").on("click", dodaj_form);
   $("#zapisz_button").on("click", zapisz);
   $("#graj_button").on("click", gra);
-  $("#ranking_button").on("click", ranking);
+  $("#ranking_button").on("click", czytaj_ranking);
   $(".odp_button").each(function(index) {
     $(this).on("click", function() {sprawdz($(this))});
   });
-  if(imie = "") {
+  if(imie == "") {
     $("#imie_button").on("click", function() {
       imie = $("#imie_input").val();
       document.cookie = imie;
@@ -29,9 +30,26 @@ $(document).ready( function() {
     $(".wiersz_gra").show();
   }
 });
-function ranking() {
+function czytaj_ranking() {
   strona = "ranking";
   console.log("Funkcja ranking");
+  $("#dodaj_form").hide();
+  $("#gra").hide();
+  $("#ranking_zawartosc=").show();
+  $.ajax({
+    async: false,
+    url: "ranking.json",
+    dataType: "json",
+    success: function(ranking) {
+    for(i = 0; i < ranking["ranking"].length; i++)
+      $("#ranking_zawartosc").append("<div class = 'ranking_wiersz'>" + ranking["ranking"][i].imie + " wygrał(a) "+ ranking["ranking"][i].kwota + "</div>");
+      console.log($("#ranking_zawartosc"));
+    },
+    error: function(err) {
+      console.error(err.status);
+    }
+  });
+
 }
 function sprawdz(index) {
   console.log("Funkcja sprawdz");
@@ -55,6 +73,24 @@ function sprawdz(index) {
     runda++;
   }
   else {
+    strona = "koniec_gry";
+    if(runda > 1)
+      kwota = $("#kwoty li:eq(" + (runda - 2) + ")").html();
+    else
+      kwota = "0 zł";
+    json = {
+      imie: imie,
+      kwota: kwota
+    };
+    console.log(imie);
+    console.log();
+    $.ajax({
+      url: "ranking.php",
+      method: "post",
+      data: json
+    })
+    .done(function(res) {console.log(res)})
+    .fail(function(res) {console.log(res)});
     $(index).css("background-color", "red");
     $(".odp_button").each(function(index) {
       if($(this).html() == poprawna_odp){

@@ -58,6 +58,7 @@ body {
   padding: 0;
   width: 100%;
   margin-bottom: 5rem;
+  text-align: center;
 }
 .wiersz_gra {
   width: 100%;
@@ -169,4 +170,35 @@ body {
   padding: 2rem 0;
   line-height: 100%;
   width: 100%;
+}
+
+#dodaj_form {
+  float: left;
+  width: 100%;
+  background-color: #330066;
+  text-align: center;
+  height: 33rem;
+  padding: 0;
+  margin: 0;
+  display: block;
+  color: #ccff99;
+}
+#ranking_zawartosc {
+  width: 100%;
+  height: 100%;
+  background-color: #330066;
+  color: #000;
+  border: solid black 1px;
+  font-size: 1rem;
+  overflow: scroll;
+}
+.ranking_wiersz {
+  width: 100%;
+  height: 1rem;
+  float: top;
+  text-align: center;
+  border: solid white .4rem;
+  margin-top: .2rem;
+  padding: .5rem 0;
+  line-height: .8rem;
 }
