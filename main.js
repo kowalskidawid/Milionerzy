@@ -115,7 +115,9 @@ function gra() {
   console.log("Funkcja gra");
   strona = "gra"
   $("#dodaj_form").hide();
-  $(".wiersz_gra").hide();
+  $(".wiersz_gra").show();
+  $("#ranking_zawartosc").hide();
+  $("#gra").show();
   runda = 1;
   pobierz_pytania();
   przydziel_pytanie();
