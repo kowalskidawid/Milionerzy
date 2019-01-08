@@ -75,7 +75,7 @@ function sprawdz(index) {
     strona = "koniec_gry";
     if(runda > 1){
       kwota = $("#kwoty li:eq(" + (runda - 2) + ")").html();
-      kwota = kwota.substring(0, kwota.length-2);
+      kwota = kwota.substring(0, kwota.length-3);
     }
     else
       kwota = "0";

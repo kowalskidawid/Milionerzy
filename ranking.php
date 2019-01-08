@@ -11,6 +11,7 @@
     }
     array_multisort($kwota, SORT_DESC, $json["ranking"]);
     $json = json_encode($json);
+    print_r($json);
     $fp = fopen($myFile, 'w') or die("Nie można otworzyć pliku");
     fwrite($fp, $json);
     fclose($fp);
